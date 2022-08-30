@@ -1,4 +1,0 @@
-{
-    "board": "arduino:avr:uno",
-    "sketch": "Com_prac_L3\\example\\example.ino"
-}
