@@ -8,6 +8,8 @@ float a=A0;
 #define VCC 5    //Supply voltage
 #define R 10000  //R=10KΩ
 
+#define PWMpin 9 
+
 //Variables
 float RT, VR, ln, Temp, T0, Read;
 
@@ -43,6 +45,11 @@ void loop() {
 
   LCD.setCursor(10,0);
   LCD.print(Temp);
+
+
+  analogWrite(PWMpin,20); // analogWrite values from 0 to 255
   delay(1000);
+
+  
 
 }
