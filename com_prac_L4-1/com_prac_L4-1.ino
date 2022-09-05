@@ -18,24 +18,15 @@ void setup() {
   
 }
 
-char x[2];
+String x = "";
 
 void loop() 
 {
   // put your main code here, to run repeatedly:
   while(Serial.available())
   {
-    x[0] = Serial.read();
-    if(x[0] == 'O')
-    {
-      //digitalWrite(led1,1);
-      
-      x[1] = Serial.read(); 
-      if(x[1] == '0')
-      {
-        digitalWrite(led1,1);
-      }
-      
-    }
-   }
+     x += char(Serial.read());
+     Serial.println(x+" "+x.length());
+     
+  }
 }
