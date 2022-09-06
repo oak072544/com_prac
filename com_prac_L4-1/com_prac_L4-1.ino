@@ -26,7 +26,13 @@ void loop()
   while(Serial.available())
   {
      x += char(Serial.read());
-     Serial.println(x+" "+x.length());
-     
+     //Serial.println(x+" "+x.length());
+
+     if(x.length()==2)
+     {
+       Serial.println(String(x[0])+" "+char(x[1]));
+       delay(1);
+       x = "";
+     }
   }
 }
