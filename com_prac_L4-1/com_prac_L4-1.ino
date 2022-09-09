@@ -6,6 +6,12 @@
 #define led3 A2
 #define led4 A3
 
+String led[] = {"A0","A1","A2","A3"} ;
+char txt[3];
+char po;
+int n = 0;
+char ID; 
+
 void setup() {
   // put your setup code here, to run once:
   DDRC = 0x0F;
@@ -25,14 +31,39 @@ void loop()
   // put your main code here, to run repeatedly:
   while(Serial.available())
   {
-     x += char(Serial.read());
+     txt[n] = char(Serial.read());
      //Serial.println(x+" "+x.length());
 
-     if(x.length()==2)
-     {
-       Serial.println(String(x[0])+" "+char(x[1]));
-       delay(1);
-       x = "";
-     }
+     if(n==1){ 
+      if(txt[0]=='O' && txt[1]!='A' && txt[1]<'4' && txt[1]!='S'){ 
+        ID = txt[1]-'0'; 
+        digitalWrite(A0+ID,1);
+      } 
+      else if(txt[0]=='F' && txt[1]!='A' && txt[1]<'4' && txt[1]!='S') 
+      { ID = txt[1]-'0'; 
+        digitalWrite(A0+ID,0);  
+      }
+      else if(txt[0]=='O' && txt[1]=='A'){ digitalWrite(A0,1); digitalWrite(A1,1); digitalWrite(A2,1); digitalWrite(A3,1); }
+      else if(txt[0]=='F' && txt[1]=='A'){ digitalWrite(A0,0); digitalWrite(A1,0); digitalWrite(A2,0); digitalWrite(A3,0); }
+      else{ Serial.println("--Invalid command--"); } 
+      n=-1; 
+    }  
+    n=n+1;
   }
+  if(digitalRead(s1)==0){
+     digitalWrite(A0,1);
+     digitalWrite(A1,1);
+     digitalWrite(A2,1);
+     digitalWrite(A3,1);
+     while(digitalRead(s1)==0){delay(50);}
+     Serial.println("On all of LEDS");
+   }
+   if(digitalRead(s2)==0){
+     digitalWrite(A0,0);
+     digitalWrite(A1,0);
+     digitalWrite(A2,0);
+     digitalWrite(A3,0);
+     while(digitalRead(s2)==0){delay(50);}
+     Serial.println("Off all of LEDS");
+   }
 }
