@@ -1,5 +1,12 @@
+/*
 #include <LiquidCrystal.h>
 LiquidCrystal LCD(A4,A5,0,1,2,3);
+*/
+
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C LCD(0x27, 16, 2); // LiquidCrystal_I2C lcd(0x3F, 16, 2); 
 
 #define RT0 10000   // Ω
 #define B 3435      // K
@@ -17,8 +24,13 @@ void setup() {
   Serial.begin(9600);
   pinMode(A0,INPUT);
   T0 = 25 + 273.15;                 //Temperature T0 from datasheet, conversion from Celsius to kelvin
+
   
-  LCD.begin(16,2);
+  //LCD.begin(16,2);
+
+  LCD.begin();
+  LCD.backlight();
+  
   LCD.print("Temp : ");
 }
 
