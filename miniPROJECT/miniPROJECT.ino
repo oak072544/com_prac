@@ -9,7 +9,7 @@ LiquidCrystal LCD(A4,A5,0,1,2,3);
 LiquidCrystal_I2C LCD(0x27, 16, 2); // LiquidCrystal_I2C lcd(0x3F, 16, 2); 
 
 #define RT0 10000   // Ω
-#define B 3435      // K
+#define B 3950      // K 3435p 3950m
 float a=A0;
 
 #define VCC 5    //Supply voltage
@@ -59,7 +59,7 @@ void loop() {
   LCD.print(Temp);
 
 
-  analogWrite(PWMpin,20); // analogWrite values from 0 to 255
+  analogWrite(PWMpin,100); // analogWrite values from 0 to 255
   delay(1000);
 
   
