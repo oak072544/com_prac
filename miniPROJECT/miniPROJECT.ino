@@ -21,6 +21,8 @@ float a = A0; //TherPIN
 
 #define PWMpin 9 
 
+int MAX_temp = 70;
+
 //Variables
 float RT, VR, ln, Temp, T0, Read;
 
@@ -65,7 +67,7 @@ void loop() {
   LCD.setCursor(10,0);
   LCD.print(Temp);
 
-  LMval = analogRead(tempPin);
+  LMval = analogRead(A2);
   float mv = ( LMval / 1024.0) * 5000;
   float cel = mv / 10;
 
@@ -76,8 +78,15 @@ void loop() {
   LCD.setCursor(0,1);
   LCD.print("Temp L : ");
   LCD.print(cel);
-  
-  analogWrite(PWMpin,200); // analogWrite values from 0 to 255
+
+  if(Temp >= MAX_temp || cel >= MAX_temp)
+  {
+    analogWrite(PWMpin,0);
+  }
+  else
+  {
+    analogWrite(PWMpin,255); // analogWrite values from 0 to 255
+  }
   delay(1000);
 
   
